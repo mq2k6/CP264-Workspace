@@ -60,7 +60,11 @@ void dll_insert_start(DLL *dllp, NODE *np)
  */
 void dll_insert_end(DLL *dllp, NODE *np)
 {
+    // Defensive checks
+    if (dllp == NULL || np == NULL)
+        return;
 
+    // Check if the list is empty
     if (dllp->end == NULL)
     {
         dllp->start = np;
@@ -70,11 +74,12 @@ void dll_insert_end(DLL *dllp, NODE *np)
     }
     else
     {
-        dllp->end->next = np;
-        np->next = NULL;
         np->prev = dllp->end;
+        np->next = NULL;
+        dllp->end->next = np;
         dllp->end = np;
     }
+
     dllp->length += 1;
 }
 
