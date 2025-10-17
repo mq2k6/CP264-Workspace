@@ -16,7 +16,7 @@ Version: 2025-10-10
  */
 NODE *dll_node(char value)
 {
-    NODE *node = (NODE *)malloc(sizeof(node));
+    NODE *node = (NODE *)malloc(sizeof(NODE));
     node->data = value;
     node->next = NULL;
     node->prev = NULL;
@@ -123,18 +123,23 @@ void dll_delete_end(DLL *dllp)
  */
 void dll_clean(DLL *dllp)
 {
-    if (dllp->length > 0 && dllp->start)
+    if (dllp == NULL || dllp->start == NULL)
     {
-        NODE *curr = dllp->start;
-
-        while (curr->next)
-        {
-            free(curr);
-            curr = curr->next;
-        }
-
-        dllp->length = 0;
-        dllp->end = NULL;
-        dllp->start = NULL;
+        return;
     }
+
+    NODE *curr = dllp->start;
+    NODE *next = NULL;
+
+    while (curr != NULL)
+    {
+        next = curr->next; // Save the next pointer
+        free(curr);        // Free the current node
+        curr = next;       // Move to the next node
+    }
+
+    // Reset the list structure
+    dllp->start = NULL;
+    dllp->end = NULL;
+    dllp->length = 0;
 }
