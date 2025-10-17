@@ -30,8 +30,12 @@ NODE *dll_node(char value)
  */
 void dll_insert_start(DLL *dllp, NODE *np)
 {
+    // Defensive checks
+    if (dllp == NULL || np == NULL)
+        return;
 
-    if (dllp->length < 1)
+    // Check if the list is empty
+    if (dllp->start == NULL)
     {
         dllp->start = np;
         dllp->end = np;
@@ -40,11 +44,12 @@ void dll_insert_start(DLL *dllp, NODE *np)
     }
     else
     {
-        dllp->start->prev = np;
         np->prev = NULL;
         np->next = dllp->start;
+        dllp->start->prev = np;
         dllp->start = np;
     }
+
     dllp->length += 1;
 }
 
@@ -56,7 +61,7 @@ void dll_insert_start(DLL *dllp, NODE *np)
 void dll_insert_end(DLL *dllp, NODE *np)
 {
 
-    if (dllp->length < 1)
+    if (dllp->end == NULL)
     {
         dllp->start = np;
         dllp->end = np;
