@@ -10,10 +10,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "queue.h"
-#include "queue.c"
 #include "expression.h"
-#include "expression.c"
-#include "stack.c"
+#include "stack.h"
 
 char *tests[] = { "1+2", "(1+2*3)", "10-((3*4)+8)/4", "(2+3)*(3-1)", "1*2*3", "-1*5", "5+(3*-11)", "(7-3)*(5+((8*4)-9))"};
 
