@@ -11,7 +11,6 @@ Version: 2025-10-27
 
 
 #include "common.h"
-#include "common.c"
 #include <stdio.h>
 
 /* 
